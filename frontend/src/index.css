@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.hero-bg-1 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8)),
+    url("hero6.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.btncolor {
+  background-color: #3077a3;
+}
+.hero-bg-2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8)),
+    url("hero6.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+.btncolor:hover {
+  background-color: #fd4a4e;
+}
+.txtcolor {
+  color: #3077a3;
+}
+.txtcolor:hover {
+  color: #fd4a4e;
+  text-decoration: underline;
+}
+@media (max-width: 639px) {
+  .signout {
+    display: none;
+  }
+}
+@media(max-width: 1178px) {
+.hero-bg-2{
+  background-size: cover;
+}
+}
+.shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, #2c2c2c 4%, #333 25%, #2c2c2c 36%);
+  background-size: 1000px 100%;
+}
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+.logos{
+  filter:brightness(150%)
+}
+
+/* For Chrome, Safari, and Opera */
+/* .hide-scrollbar::-webkit-scrollbar {
+  display: none; 
+} */
+/* For Internet Explorer and Edge */
+/* For Firefox */
+/* .hide-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+} */
+.height{
+  height: 80%;
+}
+.width-poster{
+width: 80%;}
+
+
+
+.bright{
+  filter: drop-shadow(1.1px 11px 10px #fd4a4e);
+}
