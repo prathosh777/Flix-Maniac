@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import html from "../logos/HTML.png";
 import css from "../logos/CSS.png";
 import js from "../logos/JS.png";
-import react from "../logos/react.png";
+import react from "../logos/React.png";
 import tailwind from "../logos/tailwind-css.webp";
 import framer from "../logos/framer-motion.svg";
 import node from "../logos/Node-js.png";
