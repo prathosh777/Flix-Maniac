@@ -30,23 +30,23 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative w-[80vw]  md:h-[333px] bg-gray-300 text-black rounded-md">
+    <div className="relative h-[200px] w-full md:h-[333px] bg-gray-300 text-black rounded-md">
       {/* Carousel Wrapper */}
       <div
         ref={carouselRef}
-        className="flex overflow-x-scroll scrollbar-hide space-x-4 p-4"
+        className="flex overflow-x-scroll scrollbar-hide md:min-w-[200px] min-w-[150px] space-x-4 p-4"
       >
         {carouselItems.map((item) => (
           <motion.div
             key={item.id}
-            className="min-w-[250px] w-[300px]  relative overflow-hidden bg-black rounded-lg shadow-lg cursor-pointer"
+            className="md:min-w-[250px]  min-w-[160px] w-[300px]  relative overflow-hidden bg-black rounded-lg shadow-lg cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
             {/* Image */}
             <motion.img
               src={item.image}
               alt={item.title}
-              className="w-full object-contain  h-[80%] "
+              className="md:w-full pl-6 md:pl-0 w-[80%] object-contain  md:h-[80%] h-[120px] "
               whileHover={{ opacity: 1 }}
             />
 

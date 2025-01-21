@@ -1,10 +1,9 @@
-
 import { fetchAPI } from "../services/API-services.js";
-
 export const getTrendingTv = async (req, res) => {
   try {
     const data = await fetchAPI(
-      "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1"
+      //"https://api.themoviedb.org/3/tv/popular?language=en-US&page=1"
+        "https://api.themoviedb.org/3/trending/tv/day?language=en-US&page=1"
     );
     const randomTv =
       data.results[Math.floor(Math.random() * data.results?.length)];

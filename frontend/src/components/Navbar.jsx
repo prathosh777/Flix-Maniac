@@ -93,7 +93,7 @@ const Navbar = () => {
             alt="Avatar"
             className="h-8 rounded-full cursor-pointer"
           />
-          <LogOut  className="size-6 signout cursor-pointer" onClick={logout} />
+          <LogOut className="size-6 signout cursor-pointer" onClick={logout} />
         </div>
       </motion.header>
 
@@ -136,48 +136,47 @@ const Navbar = () => {
           </Link>
         </div>
       )} */}
-     
-     {isMobileMenuOpen && (
-  <div className="w-[80%] absolute left-1/2 transform -translate-x-1/2 text-center sm:hidden mt-0 z-50 bg-black border rounded border-gray-800"
-       style={{ top: '5rem' }} // Adjust top to match the navbar height
-  >
-    <Link
-      to="/"
-      className="block hover:underline p-2"
-      onClick={() => {
-        toggleMobileMenu();
-        setContentType("movie");
-      }}
-    >
-      Movies
-    </Link>
-    <Link
-      to="/"
-      className="block hover:underline p-2"
-      onClick={() => {
-        toggleMobileMenu();
-        setContentType("tv");
-      }}
-    >
-      TV Shows
-    </Link>
-    <Link
-      to="/history"
-      className="block hover:underline p-2"
-      onClick={toggleMobileMenu}
-    >
-      Search History
-    </Link>
-    <Link
-      
-      className="block hover:underline p-2 lg:hidden"
-      onClick={logout}
-    >
-      Logout
-    </Link>
-  </div>
-)}
 
+      {isMobileMenuOpen && (
+        <div
+          className="w-[80%] absolute left-1/2 transform -translate-x-1/2 text-center sm:hidden mt-0 z-50 bg-black border rounded border-gray-800"
+          style={{ top: "5rem" }} // Adjust top to match the navbar height
+        >
+          <Link
+            to="/"
+            className="block hover:underline p-2"
+            onClick={() => {
+              toggleMobileMenu();
+              setContentType("movie");
+            }}
+          >
+            Movies
+          </Link>
+          <Link
+            to="/"
+            className="block hover:underline p-2"
+            onClick={() => {
+              toggleMobileMenu();
+              setContentType("tv");
+            }}
+          >
+            TV Shows
+          </Link>
+          <Link
+            to="/history"
+            className="block hover:underline p-2"
+            onClick={toggleMobileMenu}
+          >
+            Search History
+          </Link>
+          <Link
+            className="block hover:underline p-2 lg:hidden"
+            onClick={logout}
+          >
+            Logout
+          </Link>
+        </div>
+      )}
     </>
   );
 };

@@ -3,12 +3,15 @@ import { fetchAPI } from "../services/API-services.js";
 export const getTrendingMovie = async (req, res) => {
   try {
     const data = await fetchAPI(
-      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
+      // "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
+         "https://api.themoviedb.org/3/trending/movie/day?language=en-US&page=1"
     );
     const randomMovie =
       data.results[Math.floor(Math.random() * data.results?.length)];
     res.json({ success: true, content: randomMovie });
   } catch (error) {
+    console.error("Error fetching trending Movie shows:", error.message);
+
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });

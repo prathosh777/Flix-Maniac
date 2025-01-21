@@ -29,7 +29,7 @@ const AuthScreen = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: "easeOut" }}
-          className="text-4xl md:text-6xl font-bold mb-4"
+          className="text-3xl md:text-6xl font-bold mb-4"
         >
           Infinite entertainment, endless fun.
         </motion.h1>
@@ -37,7 +37,7 @@ const AuthScreen = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-lg mb-4 px-8"
+          className="md:text-lg text-sm mb-4 px-8"
         >
           Watch anywhere, anytime no excuses, just pure entertainment, no matter where you are!
         </motion.p>
@@ -46,7 +46,7 @@ const AuthScreen = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: false }}
-          className="mb-4 m-8"
+          className="mb-4 m-8 md:text-lg text-sm"
         >
           "Can’t wait to start watching? Enter your email now to join.
         </motion.p>
@@ -57,11 +57,11 @@ const AuthScreen = () => {
           <input
             type="email"
             placeholder="Email address"
-            className="p-2 rounded flex-1 bg-black/80 border border-gray-700"
+            className="p-2 rounded flex-1  bg-black/80 border border-gray-700"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button onClick={'#signup'} className="bg-[#3077a3]  text-xl lg:text-2xl px-2 lg:px-6 py-1 md:py-2 rounded flex justify-center items-center">
+          <button onClick={'#signup'} className="bg-[#3077a3]  text-base lg:text-2xl px-2 lg:px-6 py-1 md:py-2 rounded flex justify-center items-center">
             Get Started
             <ChevronRight className="w-8 md:w-10" />
           </button>
@@ -113,7 +113,7 @@ const AuthScreen = () => {
                 alt="stranger things image"
                 className="mt-4"
               />
-              <div className="flex item-center md:w-[50%] w-[80%] gap-2 absolute bottom-5 left-1/2 -translate-x-1/2 bg-black lg:w-1/2 h-24 border border-slate-500 rounded-md px-2">
+              <div className="flex  item-center md:w-[50%] w-[77%] gap-2 absolute bottom-5 left-1/2 -translate-x-1/2 bg-black lg:w-1/2 h-[4.5em] md:h-24 border border-slate-500 rounded-md px-2">
                 <img
                   src="/Breakingbad.webp"
                   alt="Breaking bad image"

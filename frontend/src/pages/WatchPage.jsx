@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useContentStore } from "../store/content";
@@ -15,91 +16,54 @@ const WatchPage = () => {
   const [trailers, setTrailers] = useState([]);
   const [currentTrailerId, setCurrentTrailerId] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [content, setContent] = useState({});
+  const [content, setContent] = useState(null);
   const { contentType } = useContentStore();
   const [similarContent, setSimilarContent] = useState([]);
   const sliderRef = useRef(null);
 
   useEffect(() => {
-    const getTrailers = async () => {
+    const fetchData = async () => {
       try {
-        const res = await axios.get(`/api/v1/${contentType}/${id}/trailers`);
-        setTrailers(res.data.trailers);
+        const [trailersRes, similarRes, detailsRes] = await Promise.all([
+          axios.get(`/api/v1/${contentType}/${id}/trailers`),
+          axios.get(`/api/v1/${contentType}/${id}/similar`),
+          axios.get(`/api/v1/${contentType}/${id}/details`)
+        ]);
+        
+        setTrailers(trailersRes.data.trailers || []);
+        setSimilarContent(similarRes.data.content || []);
+        setContent(detailsRes.data.content || null);
       } catch (error) {
-        if (error.message.includes("404")) {
-          console.log("No trailers found");
-          setTrailers([]);
-        } else {
-          console.error("Error fetching trailers:", error);
-        }
-      }
-    };
-    getTrailers();
-  }, [contentType, id]);
-
-  useEffect(() => {
-    const getSimilarContents = async () => {
-      try {
-        const res = await axios.get(`/api/v1/${contentType}/${id}/similar`);
-        setSimilarContent(res?.data?.content);
-      } catch (error) {
-        if (error.message.includes("404")) {
-          console.log("No similar content found");
-          setSimilarContent([]);
-        } else {
-          console.error("Error fetching trailers:", error);
-        }
-      }
-    };
-    getSimilarContents();
-  }, [contentType, id]);
-
-  useEffect(() => {
-    const getContentDetails = async () => {
-      try {
-        const res = await axios.get(`/api/v1/${contentType}/${id}/details`);
-        setContent(res.data.content);
-      } catch (error) {
-        if (error.message.includes("404")) {
-          console.log("No details found");
-          setContent(null);
-        } else {
-          console.error("Error fetching details:", error);
-        }
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
     };
-    getContentDetails();
+
+    fetchData();
   }, [contentType, id]);
 
   const handleNext = () => {
     if (currentTrailerId < trailers.length - 1) {
-      setCurrentTrailerId(currentTrailerId + 1);
+      setCurrentTrailerId(curr => curr + 1);
     }
   };
 
   const handlePrev = () => {
     if (currentTrailerId > 0) {
-      setCurrentTrailerId(currentTrailerId - 1);
+      setCurrentTrailerId(curr => curr - 1);
     }
   };
 
   const scrollLeft = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({
-        left: -sliderRef.current.offsetWidth,
-        behavior: "smooth",
-      });
+      sliderRef.current.scrollBy({ left: -sliderRef.current.offsetWidth, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({
-        left: sliderRef.current.offsetWidth,
-        behavior: "smooth",
-      });
+      sliderRef.current.scrollBy({ left: sliderRef.current.offsetWidth, behavior: "smooth" });
     }
   };
 
@@ -131,48 +95,38 @@ const WatchPage = () => {
       <div className="mx-auto container px-4 py-8 h-full">
         <Navbar />
         {trailers.length > 0 && (
-          <div className="flex justify-between items-center mb-4">
+          <div id="play" className="flex justify-between items-center mb-4">
             <button
-              className={`bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded ${
-                currentTrailerId === 0 ? "cursor-not-allowed opacity-50" : ""
-              }`}
+              className={`bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded ${currentTrailerId === 0 ? "cursor-not-allowed opacity-50" : ""}`}
               disabled={currentTrailerId === 0}
-              onClick={handlePrev}
+              onClick={handlePrev} 
+              title="Previous Trailer"
             >
               <ChevronLeft size={24} />
             </button>
             <button
-              className={`bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded ${
-                currentTrailerId === trailers.length - 1
-                  ? "cursor-not-allowed opacity-50"
-                  : ""
-              }`}
+              className={`bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded ${currentTrailerId === trailers.length - 1 ? "cursor-not-allowed opacity-50" : ""}`}
               disabled={currentTrailerId === trailers.length - 1}
-              onClick={handleNext}
+              onClick={handleNext} 
+              title="Next Trailer"
             >
               <ChevronRight size={24} />
             </button>
           </div>
         )}
         <div className="aspect-video mb-8 p-2 sm:px-10 md:px-32">
-          {trailers.length > 0 && (
+          {trailers.length > 0 ? (
             <ReactPlayer
-              url={`https://www.youtube.com/watch?v=${trailers[currentTrailerId].key}`}
+              url={`https://www.youtube.com/watch?v=${trailers[currentTrailerId]?.key}`}
               controls={true}
               width="90%"
               height="80%"
               className="mx-auto overflow-hidden rounded-lg"
             />
-          )}
-          {trailers.length === 0 && (
+          ) : (
             <h2 className="text-xl text-center mt-60">
               No trailers available for
-              <span className="font-bold text-red-600">
-                {" "}
-                {content?.title || content?.name}.
-              </span>
-              {" "}
-
+              <span className="font-bold text-red-600">{` ${content?.title || content?.name}.`}</span>
               Please try again later
             </h2>
           )}
@@ -184,26 +138,28 @@ const WatchPage = () => {
           transition={{ duration: 1, ease: "easeInOut" }}
           className="flex flex-col md:flex-row items-center justify-between gap-20 max-w-6xl mx-auto"
         >
-          <div className="mb-4 md:mb-0">
-            <motion.h2 initial={{ opacity: 0, y: 20 }}
+          <div className="mb-4 md:mb-0 ">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-              viewport={{ once: false }} className="md:text-5xl text-2xl font-bold text-balance">
+              viewport={{ once: false }}
+              className="md:text-5xl text-2xl font-bold text-balance"
+              id="moreinfo"
+            >
               {content?.title || content?.name}
             </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-              viewport={{ once: false }} className="mt-2 text-sm md:text-lg">
-              {formatReleaseDate(
-                content?.release_date || content?.first_air_date
-              )}{" "}
-              |{" "}
-              {content?.adult ? (
-                <span className="text-red-600">18+</span>
-              ) : (
-                <span className="text-green-600">PG-13</span>
-              )}
+              viewport={{ once: false }}
+              className="mt-2 text-sm md:text-lg"
+            >
+              {formatReleaseDate(content?.release_date || content?.first_air_date)} | 
+              <span className={content?.adult ? "text-red-600" : "text-green-600"}>
+                {content?.adult ? " 18+" : " PG-13"}
+              </span>
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -236,56 +192,29 @@ const WatchPage = () => {
               className="flex overflow-x-scroll gap-4 scrollbar-hide pb-4 group"
               ref={sliderRef}
             >
-              {similarContent.map((content) => {
-                if (content.poster_path === null) {
-                  return null;
-                }
-                return (
-                  <Link
-                    key={content.id}
-                    to={`/watch/${content.id}`}
-                    className="w-52 flex-none"
-                  >
+              {similarContent.map((similar) => (
+                similar.poster_path && (
+                  <Link key={similar.id} to={`/watch/${similar.id}`} className="w-52 flex-none">
                     <img
-                      src={SMALL_IMG_BASE_URL + content?.poster_path}
+                      src={SMALL_IMG_BASE_URL + similar.poster_path}
                       alt="Poster path"
                       className="md:w-full w-[180px] h-[250px] md:h-[330px] rounded-md"
                     />
-                    {/* <h4 className="text-lg mt-2 font-semibold">
-                      {content.title > 20
-                        ? content.title.slice(0, 20) + "..."
-                        : content.title || content.name > 20
-                        ? content.name.slice(0, 20) + "..."
-                        : content.name}
-                    </h4> */}
                     <h4 className="text-base mt-2 font-semibold">
-                      {" "}
-                      {content?.title &&
-                      typeof content.title === "string" &&
-                      content.title.length > 20
-                        ? content.title.slice(0, 22) + "..."
-                        : content?.name &&
-                          typeof content.name === "string" &&
-                          content.name.length > 20
-                        ? content.name.slice(0, 22) + "..."
-                        : content?.title ||
-                          content?.name ||
-                          "No title available"}
+                      {similar.title?.length > 22 ? `${similar.title.slice(0, 22)}...` : similar.title || similar.name || "No title available"}
                     </h4>
                   </Link>
-                );
-              })}
+                )
+              ))}
               <ChevronRight
-                className="absolute top-1/2 -translate-y-1/2 right-2 w-8 h-8
-                                        opacity-[-50px]  transition-all duration-300 cursor-pointer
-                                         bg-white text-gray-500 rounded-full"
+                className="absolute top-1/2 -translate-y-1/2 right-2 w-8 h-8 opacity-[-50px] transition-all duration-300 cursor-pointer bg-white text-gray-500 rounded-full"
                 onClick={scrollRight}
+                title="Scroll Right"
               />
               <ChevronLeft
-                className="absolute top-1/2 -translate-y-1/2 left-2 w-8 h-8 opacity-0 
-                                group-hover:opacity-100 transition-all duration-300 cursor-pointer bg-white 
-                                text-gray-500 rounded-full"
+                className="absolute top-1/2 -translate-y-1/2 left-2 w-8 h-8 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer bg-white text-gray-500 rounded-full"
                 onClick={scrollLeft}
+                title="Scroll Left"
               />
             </div>
           </motion.div>

@@ -11,7 +11,7 @@ const {user}= useAuthStore();
   };
 
   return (
-    user ? (<div className="max-w-5xl mx-auto text-white p-8">
+    user ? (<div className="max-w-5xl mx-auto text-white p-8 mb-40 ">
       <Navbar />
       <h2 className="text-3xl pt-32 font-bold text-center mb-8" id="faq">Frequently Asked Questions</h2>
 
@@ -93,7 +93,7 @@ const {user}= useAuthStore();
       </div>
     </div>
 ) : (
-  <div className="max-w-5xl mx-auto mb-20 text-white p-8">
+  <div className="max-w-5xl mx-auto mb-20 text-white ">
        <header className="max-w-8xl mx-auto flex items-center justify-between p-4">
           <Link className="flex" to={"/"}>
             <img
@@ -119,7 +119,7 @@ const {user}= useAuthStore();
         </header>
       <h2 className="text-3xl py-16 font-bold text-center mb-8" id="faq">Frequently Asked Questions</h2>
 
-      <div className="space-y-4">
+      <div className="space-y-4 p-8">
         <motion.div
           className="bg-gray-800 p-4 rounded-lg"
           initial={{ opacity: 0 }}

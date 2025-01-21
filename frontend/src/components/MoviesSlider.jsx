@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useContentStore } from "../store/content";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { ORIGINAL_IMG_BASE_URL, SMALL_IMG_BASE_URL } from "../utils/constants";
+import {  SMALL_IMG_BASE_URL } from "../utils/constants";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -64,9 +64,9 @@ const MoviesSlider = ({ category }) => {
           >
             <motion.div
               className="rounded-lg overflow-hidden"
-              initial={{ scale: 0.8 }} // Start small
-              animate={{ scale: 1 }} // Animate to normal size
-              transition={{ duration: 0.4 }} // Duration for scaling
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }} 
+              transition={{ duration: 0.4 }} 
             >
               <img
                 src={SMALL_IMG_BASE_URL + item?.poster_path}

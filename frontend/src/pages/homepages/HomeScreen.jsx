@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
 import { Info, Play } from "lucide-react";
-import useToGetTrendingMovies from "../../hook/useToGetTrendingMovies";
+import useToGetTrendingMovies from "../../hook/useToGetTrendingMovies.jsx";
 import { MOVIE_CATEGORY, ORIGINAL_IMG_BASE_URL, TV_CATEGORY } from "../../utils/constants";
 import { useContentStore } from "../../store/content";
 import MoviesSlider from "../../components/MoviesSlider";
@@ -70,14 +70,14 @@ const HomeScreen = () => {
           <div className="flex mt-8">
             <Link
               className="bg-white hover:bg-white/80 text-black font-bold py-2 px-4 rounded mr-4 flex items-center"
-              to={`/watch/${trendingContent?.id}`}
+              to={`/watch/${trendingContent?.id}` } onClick="#play"
             >
-              <Play className="size-6 md:size-8 mr-2 fill-black" />
+              <Play  className="size-6 md:size-8 mr-2 fill-black" />
               Play
             </Link>
             <Link
               className="bg-gray-500/70 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded flex items-center"
-              to={`/watch/${trendingContent?.id}`}
+              to={`/watch/${trendingContent?.id}`} onClick="#moreinfo"
             >
               <Info className="size-6 md:size-8 mr-2" />
               More Info
