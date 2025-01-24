@@ -31,7 +31,7 @@ const Carousel = () => {
 
   return (
     <div className="relative h-[200px] w-full md:h-[333px] bg-gray-300 text-black rounded-md">
-      {/* Carousel Wrapper */}
+     
       <div
         ref={carouselRef}
         className="flex overflow-x-scroll scrollbar-hide md:min-w-[200px] min-w-[150px] space-x-4 p-4"
@@ -42,7 +42,7 @@ const Carousel = () => {
             className="md:min-w-[250px]  min-w-[160px] w-[300px]  relative overflow-hidden bg-black rounded-lg shadow-lg cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
-            {/* Image */}
+           
             <motion.img
               src={item.image}
               alt={item.title}
@@ -50,7 +50,7 @@ const Carousel = () => {
               whileHover={{ opacity: 1 }}
             />
 
-            {/* Overlay */}
+          
             <div className="text-center bg-black bg-opacity-70 text-white p-2">
               <h3 className="text-lg font-bold">{item.title}</h3>
             </div>
@@ -58,7 +58,7 @@ const Carousel = () => {
         ))}
       </div>
 
-      {/* Scroll Buttons */}
+    
       <button
         onClick={() => handleScroll(left)}
         className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-700 bg-opacity-50 p-2 rounded-full hover:size-12 "

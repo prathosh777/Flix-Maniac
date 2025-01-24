@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 const PrivacyPolicy = () => {
   const { user } = useAuthStore();
 
-  // Animation variants for content entrance
   const contentVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -15,34 +14,9 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="bg-black text-white">
-      {user ? (
-       <div className="mt-16"><Navbar /></div>
-      ) : (
-        <header className="max-w-8xl mx-auto flex items-center justify-between p-4">
-          <Link className="flex" to={"/"}>
-            <img
-              className="w-40"
-              src="/Flix-shadow.png"
-              alt="Flix Maniac logo"
-            />
-          </Link>
-          <div className="flex items-center space-x-4">
-            <Link
-              to={"/login"}
-              className="text-white w-[75px] bg-[#3077a3] py-1 px-2 rounded"
-            >
-              Sign In
-            </Link>
-            <Link
-              to={"/signup"}
-              className="text-white w-[75px] bg-[#3077a3] py-1 px-2 rounded"
-            >
-              Sign Up
-            </Link>
-          </div>
-        </header>
-      )}
-      <div className="relative bg-black text-white min-h-screen flex flex-col justify-between">
+       <div className=""><Navbar /></div>
+     
+      <div className={`${user? "pt-28" :"pt-0"} relative bg-black text-white min-h-screen flex flex-col justify-between`}>
         <motion.div
           className="flex-grow max-w-6xl md:text-lg text-base mx-auto md:px-20 px-10 py-8"
           initial="hidden"

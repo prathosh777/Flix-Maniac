@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import authroutes from "./routes/auth-routes.js";
 import movieroutes from "./routes/movie-routes.js";
 import tvroutes from "./routes/tv-routes.js";
+import personroutes from './routes/person-routes.js'
 import searchroutes from "./routes/search-routes.js";
 import { ENV_variables } from "./config/envVariables.js";
 import { connectDB } from "./config/db.js";
@@ -16,6 +17,8 @@ app.use(cookieParser());
 app.use("/api/v1/auth", authroutes);
 app.use("/api/v1/movie", protectRoute, movieroutes);
 app.use("/api/v1/tv", protectRoute, tvroutes);
+app.use("/api/v1/person", protectRoute, personroutes);
+
 app.use("/api/v1/search", protectRoute, searchroutes);
 if (ENV_variables.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "frontend/dist")));

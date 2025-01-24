@@ -1,4 +1,4 @@
-// import { json } from "express";
+ import { json } from "express";
 import { User } from "../models/user.models.js";
 import bycryptjs from "bcryptjs";
 import { generateTokensAndSendCookie } from "../utils/generatetoken.js";
@@ -61,7 +61,7 @@ export async function signup(req, res) {
 
     generateTokensAndSendCookie(newUser._id, res);
     await newUser.save();
-    // let message = document.get;
+    
     res
       .status(201)
       .json({ success: true, user: { ...newUser._doc, password: "••••••••" } });
@@ -79,8 +79,8 @@ export async function login(req, res) {
         .status(400)
         .json({ success: false, message: "All fields are required" });
     }
-    const user = await User.findOne({ email: email }); //await
-    const isPasswordCorrect = await bycryptjs.compare(password, user.password); //await
+    const user = await User.findOne({ email: email }); 
+    const isPasswordCorrect = await bycryptjs.compare(password, user.password); 
 
     if (!user || !isPasswordCorrect) {
       return res
@@ -109,15 +109,7 @@ export async function logout(req, res) {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
-// export async function authCheck(req, res) {
-//   try {
-//     res.status(200).json({ success: true, user: req.user });
-//   } catch (error) {
-//     console.log("Error in authCheck", error.message);
 
-//     res.status(500).json({ success: false, message: "Internal server error" });
-//   }
-// }
 export async function authCheck(req, res) {
 	try {
 		console.log("req.user:", req.user);

@@ -8,7 +8,7 @@
   background-size: cover;
 }
 .btncolor {
-  background-color: #3077a3;
+  background-color: #11a7e7;
 }
 .hero-bg-2 {
   background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8)),
@@ -20,7 +20,7 @@
   background-color: #fd4a4e;
 }
 .txtcolor {
-  color: #3077a3;
+  color: #1ba0d8;
 }
 .txtcolor:hover {
   color: #fd4a4e;

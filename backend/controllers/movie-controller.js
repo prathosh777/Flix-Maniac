@@ -39,7 +39,7 @@ export const getMovieDetails = async (req, res) => {
   const { id } = req.params;
   try {
     const data = await fetchAPI(
-      `https://api.themoviedb.org/3/movie/${id}?language=en-US`
+      `https://api.themoviedb.org/3/movie/${id}?language=en-US&include_adult=true`
     );
     res.status(200).json({ success: true, content: data });
   } catch (error) {

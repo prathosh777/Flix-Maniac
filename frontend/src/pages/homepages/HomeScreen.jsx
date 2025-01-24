@@ -25,7 +25,6 @@ const HomeScreen = () => {
 
   return (
     <>
-      {/* Hero section */}
       <motion.div
         className="relative h-screen text-white"
         initial={{ opacity: 0 }} 
@@ -70,14 +69,14 @@ const HomeScreen = () => {
           <div className="flex mt-8">
             <Link
               className="bg-white hover:bg-white/80 text-black font-bold py-2 px-4 rounded mr-4 flex items-center"
-              to={`/watch/${trendingContent?.id}` } onClick="#play"
+              to={`/watch/${trendingContent?.id}` } onClick={"#play"}
             >
               <Play  className="size-6 md:size-8 mr-2 fill-black" />
               Play
             </Link>
             <Link
               className="bg-gray-500/70 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded flex items-center"
-              to={`/watch/${trendingContent?.id}`} onClick="#moreinfo"
+              to={`/watch/${trendingContent?.id}`} onClick={"#moreinfo"}
             >
               <Info className="size-6 md:size-8 mr-2" />
               More Info
@@ -86,7 +85,6 @@ const HomeScreen = () => {
         </div>
       </motion.div>
       <div className="flex flex-col gap-10 bg-black text-white py-10">
-        {/* Hero section ends here */}
         {contentType === "movie"
           ? MOVIE_CATEGORY.map((category, index) => (
               <MoviesSlider key={`${category.id}-${index}`} category={category} />

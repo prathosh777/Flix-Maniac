@@ -59,23 +59,23 @@ const MoviesSlider = ({ category }) => {
         {content.map((item) => (
           <Link
             to={`/watch/${item.id}`}
-            className="md:min-w-[200px] min-w-[150px] relative group"
-            key={item.id}
+            className="md:min-w-[200px] p-4 min-w-[150px] relative group"
+            key={item.id} onClick={"#play"}
           >
             <motion.div
               className="rounded-lg overflow-hidden"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }} 
-              transition={{ duration: 0.4 }} 
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.2 }} 
             >
               <img
                 src={SMALL_IMG_BASE_URL + item?.poster_path}
                 alt="Movie image"
-                className="transition-transform duration-300 ease-in-out group-hover:scale-125"
+                className="rounded-lg transition-transform duration-300 ease-in-out "
               />
             </motion.div>
-            {/* Uncomment to show the title */}
-            {/* <p className="text-center mt-2">{item.title || item.name}</p> */}
+           
           </Link>
         ))}
       </div>

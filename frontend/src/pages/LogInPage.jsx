@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authUser";
@@ -26,19 +25,22 @@ const LogInPage = () => {
 
   return (
     <div className="h-screen w-full hero-bg-1">
+    
       <motion.header
-        className="max-w-8xl mx-auto flex items-center justify-between p-4"
         initial="hidden"
         animate="visible"
         variants={headerVariants}
         transition={{ duration: 0.5 }}
+        className="max-w-6xl mx-auto flex flex-wrap items-center justify-between mb-5 p-4 h-20 relative z-50"
       >
         <Link className="flex" to={"/"}>
-          <img
-            className="w-40"
-            src="/Flix-shadow.png"
-            alt="Flix Maniac logo"
-          />
+          <img className="w-40" src="/Flix-shadow.png" alt="Flix Maniac logo" />
+        </Link>
+        <Link
+          to={"/signup"}
+          className="text-white font-semibold bg-[#3077a3] py-1 px-2 rounded"
+        >
+          Sign Up
         </Link>
       </motion.header>
       <div className="flex justify-center items-center mt-20 mx-3">
@@ -90,7 +92,7 @@ const LogInPage = () => {
                 }}
               />
             </div>
-            <button className="w-full py-2 btncolor text-white font-semibold rounded-md">
+            <button className="w-full py-2 bg-[#3077a3] text-white font-semibold rounded-md">
               Sign In
             </button>
           </form>

@@ -11,11 +11,11 @@ const {user}= useAuthStore();
   };
 
   return (
-    user ? (<div className="max-w-5xl mx-auto text-white p-8 mb-40 ">
+  <div className="max-w-6xl mx-auto text-white  pt-2  m mb-40 ">
       <Navbar />
-      <h2 className="text-3xl pt-32 font-bold text-center mb-8" id="faq">Frequently Asked Questions</h2>
+      <h2 className={`${user? "pt-28" :"pt-16"} text-3xl  font-bold text-center pb-5 mb-8`} id="faq">Frequently Asked Questions</h2>
 
-      <div className="space-y-4">
+      <div className="space-y-4 px-4">
         <motion.div
           className="bg-gray-800 p-4 rounded-lg"
           initial={{ opacity: 0 }}
@@ -92,112 +92,7 @@ const {user}= useAuthStore();
         </motion.div>
       </div>
     </div>
-) : (
-  <div className="max-w-5xl mx-auto mb-20 text-white ">
-       <header className="max-w-8xl mx-auto flex items-center justify-between p-4">
-          <Link className="flex" to={"/"}>
-            <img
-              className="w-40 "
-              src="/Flix-shadow.png"
-              alt="Flix Maniac logo"
-            />
-          </Link>
-          <div className="flex items-center space-x-4">
-            <Link
-              to={"/login"}
-              className="text-white w-[75px] bg-[#3077a3] py-1 px-2 rounded"
-            >
-              Sign In
-            </Link>
-            <Link
-              to={"/signup"}
-              className="text-white w-[75px] bg-[#3077a3] py-1 px-2 rounded"
-            >
-              Sign Up
-            </Link>{" "}
-          </div>
-        </header>
-      <h2 className="text-3xl py-16 font-bold text-center mb-8" id="faq">Frequently Asked Questions</h2>
-
-      <div className="space-y-4 p-8">
-        <motion.div
-          className="bg-gray-800 p-4 rounded-lg"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
-        >
-          <div
-            className="flex justify-between items-center cursor-pointer"
-            onClick={() => toggleFAQ(0)}
-          >
-            <h3 className="text-xl font-semibold">What is Flix Maniac?</h3>
-            <span>{activeIndex === 0 ? "-" : "+"}</span>
-          </div>
-          {activeIndex === 0 && (
-            <motion.div
-              className="mt-2 text-sm"
-              initial={{ height: 0 }}
-              animate={{ height: "auto" }}
-              transition={{ duration: 0.3 }}
-            >
-              <p>Flix Maniac is a platform where you can explore movies and TV shows with ease.</p>
-            </motion.div>
-          )}
-        </motion.div>
-
-        <motion.div
-          className="bg-gray-800 p-4 rounded-lg"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <div
-            className="flex justify-between items-center cursor-pointer"
-            onClick={() => toggleFAQ(1)}
-          >
-            <h3 className="text-xl font-semibold">How do I search for movies or TV shows?</h3>
-            <span>{activeIndex === 1 ? "-" : "+"}</span>
-          </div>
-          {activeIndex === 1 && (
-            <motion.div
-              className="mt-2 text-sm"
-              initial={{ height: 0 }}
-              animate={{ height: "auto" }}
-              transition={{ duration: 0.3 }}
-            >
-              <p>Simply use the search bar at the top of the page to find any movie or TV show.</p>
-            </motion.div>
-          )}
-        </motion.div>
-
-        <motion.div
-          className="bg-gray-800 p-4 rounded-lg"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          <div
-            className="flex justify-between items-center cursor-pointer"
-            onClick={() => toggleFAQ(2)}
-          >
-            <h3 className="text-xl font-semibold">Do I need an account to use the site?</h3>
-            <span>{activeIndex === 2 ? "-" : "+"}</span>
-          </div>
-          {activeIndex === 2 && (
-            <motion.div
-              className="mt-2 text-sm "
-              initial={{ height: 0 }}
-              animate={{ height: "auto" }}
-              transition={{ duration: 0.3 }}
-            >
-              <p>Yes, you can not explore content without an account, but signing up will allow you to save your preferences.</p>
-            </motion.div>
-          )}
-        </motion.div>
-      </div>
-    </div>
-
-)  );
+  );
 };
 
 export default FAQPage;

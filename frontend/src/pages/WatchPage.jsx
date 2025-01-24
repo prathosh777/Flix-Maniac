@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useContentStore } from "../store/content";
@@ -27,9 +26,9 @@ const WatchPage = () => {
         const [trailersRes, similarRes, detailsRes] = await Promise.all([
           axios.get(`/api/v1/${contentType}/${id}/trailers`),
           axios.get(`/api/v1/${contentType}/${id}/similar`),
-          axios.get(`/api/v1/${contentType}/${id}/details`)
+          axios.get(`/api/v1/${contentType}/${id}/details`),
         ]);
-        
+
         setTrailers(trailersRes.data.trailers || []);
         setSimilarContent(similarRes.data.content || []);
         setContent(detailsRes.data.content || null);
@@ -45,25 +44,31 @@ const WatchPage = () => {
 
   const handleNext = () => {
     if (currentTrailerId < trailers.length - 1) {
-      setCurrentTrailerId(curr => curr + 1);
+      setCurrentTrailerId((curr) => curr + 1);
     }
   };
 
   const handlePrev = () => {
     if (currentTrailerId > 0) {
-      setCurrentTrailerId(curr => curr - 1);
+      setCurrentTrailerId((curr) => curr - 1);
     }
   };
 
   const scrollLeft = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: -sliderRef.current.offsetWidth, behavior: "smooth" });
+      sliderRef.current.scrollBy({
+        left: -sliderRef.current.offsetWidth,
+        behavior: "smooth",
+      });
     }
   };
 
   const scrollRight = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: sliderRef.current.offsetWidth, behavior: "smooth" });
+      sliderRef.current.scrollBy({
+        left: sliderRef.current.offsetWidth,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -97,17 +102,23 @@ const WatchPage = () => {
         {trailers.length > 0 && (
           <div id="play" className="flex justify-between items-center mb-4">
             <button
-              className={`bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded ${currentTrailerId === 0 ? "cursor-not-allowed opacity-50" : ""}`}
+              className={`bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded ${
+                currentTrailerId === 0 ? "cursor-not-allowed opacity-50" : ""
+              }`}
               disabled={currentTrailerId === 0}
-              onClick={handlePrev} 
+              onClick={handlePrev}
               title="Previous Trailer"
             >
               <ChevronLeft size={24} />
             </button>
             <button
-              className={`bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded ${currentTrailerId === trailers.length - 1 ? "cursor-not-allowed opacity-50" : ""}`}
+              className={`bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded ${
+                currentTrailerId === trailers.length - 1
+                  ? "cursor-not-allowed opacity-50"
+                  : ""
+              }`}
               disabled={currentTrailerId === trailers.length - 1}
-              onClick={handleNext} 
+              onClick={handleNext}
               title="Next Trailer"
             >
               <ChevronRight size={24} />
@@ -126,7 +137,9 @@ const WatchPage = () => {
           ) : (
             <h2 className="text-xl text-center mt-60">
               No trailers available for
-              <span className="font-bold text-red-600">{` ${content?.title || content?.name}.`}</span>
+              <span className="font-bold text-red-600">{` ${
+                content?.title || content?.name
+              }.`}</span>
               Please try again later
             </h2>
           )}
@@ -145,7 +158,6 @@ const WatchPage = () => {
               transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
               viewport={{ once: false }}
               className="md:text-5xl text-2xl font-bold text-balance"
-              id="moreinfo"
             >
               {content?.title || content?.name}
             </motion.h2>
@@ -156,9 +168,14 @@ const WatchPage = () => {
               viewport={{ once: false }}
               className="mt-2 text-sm md:text-lg"
             >
-              {formatReleaseDate(content?.release_date || content?.first_air_date)} | 
-              <span className={content?.adult ? "text-red-600" : "text-green-600"}>
-                {content?.adult ? " 18+" : " PG-13"}
+              {formatReleaseDate(
+                content?.release_date || content?.first_air_date
+              )}{" "}
+              |
+              <span
+                className={content?.adult ? "text-red-600" : "text-green-600"}
+              >
+                {content?.adult ? "18+" : "PG-13"}
               </span>
             </motion.p>
             <motion.p
@@ -173,6 +190,7 @@ const WatchPage = () => {
           </div>
           <img
             src={ORIGINAL_IMG_BASE_URL + content?.poster_path}
+            id="moreinfo"
             alt="poster image"
             className="max-h-[600px] object-contain w-[100%] width-poster rounded-md"
           />
@@ -192,20 +210,24 @@ const WatchPage = () => {
               className="flex overflow-x-scroll gap-4 scrollbar-hide pb-4 group"
               ref={sliderRef}
             >
-              {similarContent.map((similar) => (
-                similar.poster_path && (
-                  <Link key={similar.id} to={`/watch/${similar.id}`} className="w-52 flex-none">
-                    <img
-                      src={SMALL_IMG_BASE_URL + similar.poster_path}
-                      alt="Poster path"
-                      className="md:w-full w-[180px] h-[250px] md:h-[330px] rounded-md"
-                    />
-                    <h4 className="text-base mt-2 font-semibold">
-                      {similar.title?.length > 22 ? `${similar.title.slice(0, 22)}...` : similar.title || similar.name || "No title available"}
-                    </h4>
-                  </Link>
-                )
-              ))}
+              {similarContent.map(
+                (similar) =>
+                  similar.poster_path && (
+                    <Link
+                      onClick={"#play"}
+                      key={similar.id}
+                      to={`/watch/${similar.id}`}
+                      className="w-52 flex-none"
+                    >
+                      <img
+                        src={SMALL_IMG_BASE_URL + similar.poster_path}
+                        alt="Poster path"
+                        className="md:w-full w-[180px] h-[250px] md:h-[330px] rounded-md"
+                      />
+                      
+                    </Link>
+                  )
+              )}
               <ChevronRight
                 className="absolute top-1/2 -translate-y-1/2 right-2 w-8 h-8 opacity-[-50px] transition-all duration-300 cursor-pointer bg-white text-gray-500 rounded-full"
                 onClick={scrollRight}

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authUser";
@@ -30,20 +29,23 @@ const SignUpPage = () => {
   return (
     <div className="h-screen w-full hero-bg-1">
       <motion.header
-        className="max-w-8xl mx-auto flex items-center justify-between p-4"
         initial="hidden"
         animate="visible"
         variants={headerVariants}
         transition={{ duration: 0.5 }}
+        className="max-w-6xl mx-auto flex flex-wrap items-center justify-between mb-5 p-4 h-20 relative z-50"
       >
         <Link className="flex" to={"/"}>
-          <img
-            className="w-40"
-            src="/Flix-shadow.png"
-            alt="Flix Maniac logo"
-          />
+          <img className="w-40" src="/Flix-shadow.png" alt="Flix Maniac logo" />
+        </Link>
+        <Link
+          to={"/login"}
+          className="text-white bg-[#3077a3] py-1 px-2 rounded"
+        >
+          Sign In
         </Link>
       </motion.header>
+
       <div className="flex justify-center items-center mt-20 mx-3">
         <motion.div
           className="w-full max-w-md p-8 space-y-6 bg-black/60 rounded-lg shadow-md"
@@ -52,7 +54,10 @@ const SignUpPage = () => {
           variants={formVariants}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 id="signup" className="text-center text-white text-2xl font-bold mt-4">
+          <h1
+            id="signup"
+            className="text-center text-white text-2xl font-bold mt-4"
+          >
             Sign up
           </h1>
           <form className="space-y-4" onSubmit={handleSignUp}>
@@ -110,7 +115,7 @@ const SignUpPage = () => {
                 }}
               />
             </div>
-            <button className="w-full py-2 btncolor text-white font-semibold rounded-md">
+            <button className="w-full py-2 bg-[#3077a3] text-white font-semibold rounded-md">
               Sign up
             </button>
           </form>

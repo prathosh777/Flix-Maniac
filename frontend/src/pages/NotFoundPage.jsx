@@ -17,35 +17,13 @@ const NotFoundPage = () => {
 
   return (
     <div className="bg-black pb-10 min-h-screen text-white">
-      {user ?( <div className="mt-32"><Navbar /></div> ) : (  <header className="max-w-8xl mx-auto flex items-center justify-between p-4">
-                <Link className="flex" to={"/"}>
-                  <img
-                    className="w-40 "
-                    src="/Flix-shadow.png"
-                    alt="Flix Maniac logo"
-                  />
-                </Link>
-                <div className="flex items-center space-x-4">
-                  <Link
-                    to={"/login"}
-                    className="text-white w-[75px] bg-[#3077a3] py-1 px-2 rounded"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    to={"/signup"}
-                    className="text-white w-[75px] bg-[#3077a3] py-1 px-2 rounded"
-                  >
-                    Sign Up
-                  </Link>{" "}
-                </div>
-              </header>)}
+      <Navbar />
       <div
-        className="h-[60vh]  md:object-contain object-cover w-full bg-cover bg-center flex flex-col justify-center items-center text-white"
+        className={`${user? "mt-32" :"mt-0"} h-[60vh]  md:object-contain object-cover w-full bg-cover bg-center flex flex-col justify-center items-center text-white`}
         style={{ backgroundImage: `url('/404-error.jpg')` }}
       ></div>
       <motion.div
-        className="text-center mt-8"
+        className="text-center "
         initial="hidden"
         animate="visible"
         variants={containerVariants}

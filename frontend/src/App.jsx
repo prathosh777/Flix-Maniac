@@ -17,7 +17,7 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import ContactPage from "./pages/ContactPage";
 import FAQPage from "./pages/FAQPage";
 import Navbar from "./components/Navbar";
-import Authbar from "./components/Navbars/Authbar";
+import PersonPage from "./pages/PersonPage";
 
 const App = () => {
   const { user, authCheck, isCheckingAuth } = useAuthStore();
@@ -39,8 +39,8 @@ const App = () => {
   return (
     <div>
       <Routes>
-        {/* {user ? <Navbar /> : <Authbar />} */}
         <Route path="/" element={<HomePage />} />
+
         <Route
           path="/login"
           element={!user ? <LogInPage /> : <Navigate to={"/"} />}
@@ -61,11 +61,13 @@ const App = () => {
           path="/history"
           element={user ? <SearchHistoryPage /> : <Navigate to={"/"} />}
         />
+         <Route
+          path="/person/:id"
+          element={user ? <PersonPage /> : <Navigate to={"/"} />}
+        />
         <Route path="/*" element={<NotFoundPage />} />
-        {/* <Route path="/about" element={user ? <AboutPage /> : <Navigate to={"/signup"} />} />
-        <Route path="/developer" element={user ? <DeveloperPage /> : <Navigate to={"/signup"} />} /> 
-        <Route path="/privacy" element={user ? <PrivacyPolicyPage /> : <Navigate to={"/signup"} />} />
-        <Route path="/contact" element={user ? <ContactPage /> : <Navigate to={"/signup"} />} /> */}
+        <Route path="/watch/" element={<NotFoundPage />} />
+
         <Route path="/developer" element={<DeveloperPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/contact" element={<ContactPage />} />

@@ -34,7 +34,7 @@ const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const { setContentType } = useContentStore();
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false); 
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
