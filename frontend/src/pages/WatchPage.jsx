@@ -140,7 +140,7 @@ const WatchPage = () => {
               <span className="font-bold text-red-600">{` ${
                 content?.title || content?.name
               }.`}</span>
-              Please try again later
+            {' '}  Please try again later
             </h2>
           )}
         </div>
@@ -229,7 +229,7 @@ const WatchPage = () => {
                   )
               )}
               <ChevronRight
-                className="absolute top-1/2 -translate-y-1/2 right-2 w-8 h-8 opacity-[-50px] transition-all duration-300 cursor-pointer bg-white text-gray-500 rounded-full"
+                className="absolute top-1/2 -translate-y-1/2 right-2 w-8 h-8 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer bg-white text-gray-500 rounded-full"
                 onClick={scrollRight}
                 title="Scroll Right"
               />

@@ -114,7 +114,7 @@ const SearchPage = () => {
           </div>
         ) : (
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4  gap-4"
+            className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-10"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -130,7 +130,7 @@ const SearchPage = () => {
               return (
                 <motion.div
                   key={result.id}
-                  className="bg-gray-800 p-4 rounded hover:scale-105 transition-transform duration-300 flex flex-col items-center"
+                  className="bg-gray-800 p-4  rounded hover:scale-105 transition-transform duration-300 flex flex-col items-center"
                   variants={itemVariants}
                 >
                   {activeTab === "person" ? (
