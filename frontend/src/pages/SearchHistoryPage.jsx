@@ -85,7 +85,6 @@ const SearchHistoryPage = () => {
   }
 
 
-// Inside your SearchHistoryPage component
 return (
   <div className="bg-black text-white min-h-screen">
     <Navbar />
