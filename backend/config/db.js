@@ -20,10 +20,7 @@ export const connectDB = async () => {
   }
 
   try {
-    const connect = await mongoose.connect(ENV_variables.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const connect = await mongoose.connect(ENV_variables.MONGO_URI); // No need for additional options
     console.log("MongoDB connected: ", connect.connection.host);
   } catch (error) {
     console.error("MongoDB connection error: ", error.message);
