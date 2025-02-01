@@ -48,16 +48,40 @@ export const useAuthStore = create((set) => ({
     }
   },
 
+  // authCheck: async () => {
+  //   set({ isCheckingAuth: true });
+  //   try {
+  //     const response = await axios.get("/api/v1/auth/authCheck");
+  //     set({ user: response.data.user, isCheckingAuth: false });
+  //   } catch (error) {
+  //     console.error("Error during auth check:", error);
+  //     set({ isCheckingAuth: false, user: null });
+
+  //     //   toast.error(error.response.data.message || "An error occurred");  //? not using it because after a logout and refresh , user gets a toast
+  //   }
+  // },
   authCheck: async () => {
     set({ isCheckingAuth: true });
-    try {
-      const response = await axios.get("/api/v1/auth/authCheck");
-      set({ user: response.data.user, isCheckingAuth: false });
-    } catch (error) {
-      console.error("Error during auth check:", error);
-      set({ isCheckingAuth: false, user: null });
 
-      //   toast.error(error.response.data.message || "An error occurred");  //? not using it because after a logout and refresh , user gets a toast
+    const token = localStorage.getItem("token"); 
+    if (!token) {
+        console.warn("No token found, skipping auth check.");
+        set({ isCheckingAuth: false, user: null });
+        return;
     }
-  },
+
+    try {
+        const response = await axios.get("/api/v1/auth/authCheck", {
+            headers: { Authorization: `Bearer ${token}` }  
+        });
+
+        set({ user: response.data.user, isCheckingAuth: false });
+    } catch (error) {
+        console.error("Error during auth check:", error);
+        set({ isCheckingAuth: false, user: null });
+      //   toast.error(error.response.data.message || "An error occurred");  //? not using it because after a logout and refresh , user gets a toast
+
+    }
+},
+
 }));

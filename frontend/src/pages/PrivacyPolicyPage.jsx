@@ -67,7 +67,7 @@ const PrivacyPolicy = () => {
             If you have any questions or concerns, feel free to reach out at{" "}
             <Link
               className="underline text-blue-500 hover:text-blue-700"
-              to={"/contact"} onClick={"#contact"}
+              to={"/contact"} onClick={() => (window.location.hash = "#contact")}
             >
               Contact me
             </Link>

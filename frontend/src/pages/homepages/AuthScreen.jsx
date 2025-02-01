@@ -1,4 +1,3 @@
-
 import { ChevronRight } from "lucide-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,11 +18,14 @@ const AuthScreen = () => {
         <Link className="flex" to={"/"}>
           <img className="w-40" src="/Flix-shadow.png" alt="Flix Maniac logo" />
         </Link>
-        <Link to={"/login"} className="text-white bg-[#3077a3] py-1 px-2 rounded">
+        <Link
+          to={"/login"}
+          className="text-white bg-[#3077a3] py-1 px-2 rounded"
+        >
           Sign In
         </Link>
       </header>
-      
+
       <div className="flex flex-col items-center justify-center text-center px-8 py-40 text-white max-w-6xl mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
@@ -39,7 +41,8 @@ const AuthScreen = () => {
           transition={{ duration: 0.5 }}
           className="md:text-lg text-sm mb-4 px-8"
         >
-          Watch anywhere, anytime no excuses, just pure entertainment, no matter where you are!
+          Watch anywhere, anytime no excuses, just pure entertainment, no matter
+          where you are!
         </motion.p>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -61,7 +64,10 @@ const AuthScreen = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button onClick={'#signup'} className="bg-[#3077a3]  text-base lg:text-2xl px-2 lg:px-6 py-1 md:py-2 rounded flex justify-center items-center">
+          <button
+            onClick={() => (window.location.hash = "#signup")}
+            className="bg-[#3077a3]  text-base lg:text-2xl px-2 lg:px-6 py-1 md:py-2 rounded flex justify-center items-center"
+          >
             Get Started
             <ChevronRight className="w-8 md:w-10" />
           </button>
@@ -175,7 +181,8 @@ const AuthScreen = () => {
               viewport={{ once: false }}
               className="text-sm md:text-xl"
             >
-              Stream unlimited movies and TV shows on your phone, laptop, tablet, and TV.
+              Stream unlimited movies and TV shows on your phone, laptop,
+              tablet, and TV.
             </motion.p>
           </div>
           <div className="flex-1 relative overflow-hidden">
@@ -219,7 +226,8 @@ const AuthScreen = () => {
               viewport={{ once: false }}
               className="text-sm md:text-xl"
             >
-              Watch your favourite movies and TV shows with your kids in a secure environment.
+              Watch your favourite movies and TV shows with your kids in a
+              secure environment.
             </motion.p>
           </div>
         </div>

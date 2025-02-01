@@ -214,8 +214,7 @@ const WatchPage = () => {
                 (similar) =>
                   similar.poster_path && (
                     <Link
-                      onClick={"#play"}
-                      key={similar.id}
+                    onClick={() => (window.location.hash = "#play")}                      key={similar.id}
                       to={`/watch/${similar.id}`}
                       className="w-52 flex-none"
                     >

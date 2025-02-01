@@ -69,14 +69,14 @@ const HomeScreen = () => {
           <div className="flex mt-8">
             <Link
               className="bg-white hover:bg-white/80 text-black font-bold py-2 px-4 rounded mr-4 flex items-center"
-              to={`/watch/${trendingContent?.id}` } onClick={"#play"}
+              to={`/watch/${trendingContent?.id}` } onClick={() => (window.location.hash = "#play")}
             >
               <Play  className="size-6 md:size-8 mr-2 fill-black" />
               Play
             </Link>
             <Link
               className="bg-gray-500/70 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded flex items-center"
-              to={`/watch/${trendingContent?.id}`} onClick={"#moreinfo"}
+              to={`/watch/${trendingContent?.id}`} onClick={() => (window.location.hash = "#moreinfo")}
             >
               <Info className="size-6 md:size-8 mr-2" />
               More Info

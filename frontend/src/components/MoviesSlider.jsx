@@ -60,7 +60,7 @@ const MoviesSlider = ({ category }) => {
           <Link
             to={`/watch/${item.id}`}
             className="md:min-w-[200px] p-4 min-w-[150px] relative group"
-            key={item.id} onClick={"#play"}
+            key={item.id} onClick={() => (window.location.hash = "#play")}
           >
             <motion.div
               className="rounded-lg overflow-hidden"
