@@ -64,11 +64,11 @@ export const useAuthStore = create((set) => ({
     set({ isCheckingAuth: true });
 
     const token = localStorage.getItem("token"); 
-    if (!token) {
-        console.warn("No token found, skipping auth check.");
-        set({ isCheckingAuth: false, user: null });
-        return;
-    }
+    // if (!token) {
+    //     console.warn("No token found, skipping auth check.");
+    //     set({ isCheckingAuth: false, user: null });
+    //     return;
+    // }
 
     try {
         const response = await axios.get("/api/v1/auth/authCheck", {
