@@ -57,7 +57,7 @@ export const useAuthStore = create((set) => ({
   //     console.error("Error during auth check:", error);
   //     set({ isCheckingAuth: false, user: null });
 
-  //     //   toast.error(error.response.data.message || "An error occurred");  //? not using it because after a logout and refresh , user gets a toast
+        // toast.error(error.response.data.message || "An error occurred");  //? not using it because after a logout and refresh , user gets a toast
   //   }
   // },
   authCheck: async () => {
